@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPN Server Gacor Dunia - PRG9999</title>
+<style>
+body {
+  background-color: #0b0b0b;
+  color: #fff;
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+header {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  border-bottom: 2px solid #00ffff;
+}
+header h1 {
+  color: #00ffff;
+  margin: 5px 0;
+}
+header p {
+  color: #ffcc00;
+  margin: 0;
+  font-weight: bold;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+.predict-box {
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 0 12px #00ffff33;
+}
+.predict-box input {
+  width: 60%;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+}
+.predict-box button {
+  background: #00ccff;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+.predict-result {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #00ff88;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+th, td {
+  border: 1px solid #222;
+  padding: 8px;
+  text-align: center;
+}
+th {
+  background-color: #111;
+  color: #00ffff;
+}
+tr:nth-child(even) { background-color: #161616; }
+tr:nth-child(odd) { background-color: #1e1e1e; }
+.status-noob { background-color: #009900; color: #fff; font-weight: bold; }
+.status-pro { background-color: #990000; color: #fff; font-weight: bold; }
+.status-bot { background-color: #0066cc; color: #fff; font-weight: bold; }
+footer {
+  text-align: center;
+  color: #888;
+  margin-top: 25px;
+  font-size: 12px;
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 Daftar Server VPN Gacor Dunia</h1>
+  <p>🛰️ Real-Time Status • Made by PRG9999</p>
+</header>
+
+<div class="container">
+
+  <div class="predict-box">
+    <h3>🔮 Prediksi Server Gacor Berdasarkan ID Akun</h3>
+    <input type="text" id="userId" placeholder="Masukkan ID akun kamu...">
+    <button onclick="prediksiServer(true)">Prediksi</button>
+    <div class="predict-result" id="hasilPrediksi"></div>
+    <p style="font-size:12px;color:#ccc;margin-top:5px;">(Prediksi otomatis diperbarui setiap 3 jam)</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Negara</th>
+        <th>Zona Waktu</th>
+        <th>Jam Lokal</th>
+        <th>Status</th>
+        <th>Peluang Gacor</th>
+      </tr>
+    </thead>
+    <tbody id="serverTable"></tbody>
+  </table>
+
+</div>
+
+<footer>© 2025 PRG9999 — Real-Time VPN Monitor</footer>
+
+<script>
+const servers = [
+  ["Amerika Serikat", "America/New_York"],["Argentina", "America/Argentina/Buenos_Aires"],["Australia", "Australia/Sydney"],
+  ["Austria", "Europe/Vienna"],["Belgia", "Europe/Brussels"],["Bahrain", "Asia/Bahrain"],["Bulgaria", "Europe/Sofia"],
+  ["Brasil", "America/Sao_Paulo"],["Kamboja", "Asia/Phnom_Penh"],["Kanada", "America/Toronto"],["Cile", "America/Santiago"],
+  ["Kolombia", "America/Bogota"],["Ceko", "Europe/Prague"],["Denmark", "Europe/Copenhagen"],["Estonia", "Europe/Tallinn"],
+  ["Finlandia", "Europe/Helsinki"],["Prancis", "Europe/Paris"],["Jerman", "Europe/Berlin"],["Yunani", "Europe/Athens"],
+  ["Hongkong", "Asia/Hong_Kong"],["Hungaria", "Europe/Budapest"],["India", "Asia/Kolkata"],["Islandia", "Atlantic/Reykjavik"],
+  ["Indonesia", "Asia/Jakarta"],["Irak", "Asia/Baghdad"],["Irlandia", "Europe/Dublin"],["Israel", "Asia/Jerusalem"],
+  ["Italia", "Europe/Rome"],["Jepang", "Asia/Tokyo"],["Kazakhstan", "Asia/Almaty"],["Latvia", "Europe/Riga"],
+  ["Lituania", "Europe/Vilnius"],["Malaysia", "Asia/Kuala_Lumpur"],["Myanmar", "Asia/Yangon"],["Meksiko", "America/Mexico_City"],
+  ["Moldova", "Europe/Chisinau"],["Nepal", "Asia/Kathmandu"],["Belanda", "Europe/Amsterdam"],["Norwegia", "Europe/Oslo"],
+  ["Oman", "Asia/Muscat"],["Pakistan", "Asia/Karachi"],["Filipina", "Asia/Manila"],["Polandia", "Europe/Warsaw"],
+  ["Portugal", "Europe/Lisbon"],["Qatar", "Asia/Qatar"],["Rumania", "Europe/Bucharest"],["Rusia", "Europe/Moscow"],
+  ["Arab Saudi", "Asia/Riyadh"],["Serbia", "Europe/Belgrade"],["Singapura", "Asia/Singapore"],["Slovakia", "Europe/Bratislava"],
+  ["Afrika Selatan", "Africa/Johannesburg"],["Korea Selatan", "Asia/Seoul"],["Spanyol", "Europe/Madrid"],
+  ["Swedia", "Europe/Stockholm"],["Swiss", "Europe/Zurich"],["Thailand", "Asia/Bangkok"],["Turki", "Europe/Istanbul"],
+  ["Ukraina", "Europe/Kyiv"],["Uni Emirat Arab", "Asia/Dubai"],["Inggris Raya", "Europe/London"],["Vietnam", "Asia/Ho_Chi_Minh"]
+];
+
+function randomStatus() {
+  const types = [
+    {t:"NOOB", c:"status-noob"},
+    {t:"PRO", c:"status-pro"},
+    {t:"BOT", c:"status-bot"}
+  ];
+  return types[Math.floor(Math.random()*types.length)];
+}
+
+function randomPercent() {
+  return Math.floor(Math.random()*51)+50 + "%";
+}
+
+function renderTable() {
+  const tbody = document.getElementById("serverTable");
+  tbody.innerHTML = "";
+  servers.forEach((s, i) => {
+    const time = new Date().toLocaleTimeString("id-ID", { timeZone: s[1] });
+    const status = randomStatus();
+    tbody.innerHTML += `
+      <tr>
+        <td>${i+1}</td>
+        <td>${s[0]}</td>
+        <td>${s[1]}</td>
+        <td>${time}</td>
+        <td class="${status.c}">${status.t}</td>
+        <td>${randomPercent()}</td>
+      </tr>`;
+  });
+}
+
+function hashID(id) {
+  return [...id].reduce((a, c) => a + c.charCodeAt(0), 0);
+}
+
+function prediksiServer(manual=false) {
+  const id = document.getElementById("userId").value.trim();
+  const hasil = document.getElementById("hasilPrediksi");
+  if (!id) {
+    hasil.innerHTML = "⚠️ Masukkan ID akun terlebih dahulu!";
+    hasil.style.color = "orange";
+    return;
+  }
+
+  const intervalJam = 3; // 🔁 ubah ke 3 jam
+  const waktuSekarang = Date.now();
+  const waktuTersimpan = localStorage.getItem("waktuPrediksi");
+  const dataTersimpan = JSON.parse(localStorage.getItem("prediksiData")) || {};
+
+  // cek jika masih dalam waktu interval
+  if (!manual && waktuTersimpan && waktuSekarang - waktuTersimpan < intervalJam * 60 * 60 * 1000) {
+    hasil.innerHTML = `🔥 Server Gacor Kamu: <b>${dataTersimpan.server}</b> (${dataTersimpan.zona})`;
+    hasil.style.color = "#00ff88";
+    return;
+  }
+
+  // buat prediksi baru
+  const hash = hashID(id + Math.floor(waktuSekarang / (intervalJam * 60 * 60 * 1000)));
+  const index = hash % servers.length;
+  const [negara, zona] = servers[index];
+  hasil.innerHTML = `🔥 Server Gacor Kamu: <b>${negara}</b> (${zona})`;
+  hasil.style.color = "#00ff88";
+
+  localStorage.setItem("prediksiData", JSON.stringify({server: negara, zona}));
+  localStorage.setItem("waktuPrediksi", waktuSekarang);
+}
+
+setInterval(renderTable, 1000);
+renderTable();
+</script>
+
+</body>
+</html>
